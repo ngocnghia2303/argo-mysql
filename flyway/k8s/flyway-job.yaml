@@ -12,7 +12,7 @@ spec:
         command: ["flyway", "migrate"]
         env:
         - name: FLYWAY_URL
-          value: "jdbc:mysql://your-mysql-server.mysql.database.azure.com:3306/mydb"
+          value: "jdbc:mysql://10.240.0.11:3306/config_dr"
         - name: FLYWAY_USER
           valueFrom:
             secretKeyRef:
