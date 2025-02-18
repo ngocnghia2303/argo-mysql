@@ -1,0 +1,1 @@
+DELETE FROM `config_dr`.`config_properties` WHERE (`application` = 'nghia-service-1');

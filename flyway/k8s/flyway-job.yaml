@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: flyway-migration
+  namespace: database
+spec:
+  template:
+    spec:
+      containers:
+      - name: flyway
+        image: flyway/flyway:latest
+        command: ["flyway", "migrate"]
+        env:
+        - name: FLYWAY_URL
+          value: "jdbc:mysql://your-mysql-server.mysql.database.azure.com:3306/mydb"
+        - name: FLYWAY_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_USER
+        - name: FLYWAY_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_PASSWORD
+        - name: FLYWAY_LOCATIONS
+          value: "filesystem:/flyway/migrations"
+        volumeMounts:
+        - name: flyway-migrations
+          mountPath: /flyway/migrations
+      volumes:
+      - name: flyway-migrations
+        configMap:
+          name: flyway-migrations
+      restartPolicy: Never
