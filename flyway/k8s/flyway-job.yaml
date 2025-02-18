@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: flyway-migration
-  namespace: database
+  namespace: mysql-test
 spec:
   template:
     spec:

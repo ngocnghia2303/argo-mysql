@@ -2,9 +2,9 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: flyway-migrations
-  namespace: database
+  namespace: mysql-test
 data:
   V1_insert_data.sql: |
     INSERT INTO `config_dr`.`config_properties` (`application`, `profile`, `label`, `p_key`, `p_value`) VALUES ('nghia-service', 'sboot-rabbit-release', 'master', 'nghia.key', 'demo');
-  V2__add_user_table.sql: |
-    ALTER TABLE users ADD COLUMN age INT;
+  V2_delete_data.sql: |
+    DELETE FROM `config_dr`.`config_properties` WHERE (`application` = 'nghia-service-1');
